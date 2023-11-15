@@ -1,0 +1,7 @@
+# Introducción
+
+El artículo "Un método para determinar el peso de las contribuciones de los programadores para medir el riesgo asociado a su salida de un proyecto" aborda el problema de la rotación de programadores en proyectos de software. La rotación de programadores puede tener un impacto negativo significativo en un proyecto, ya que puede provocar la pérdida de conocimiento crítico, la disminución de la productividad y el aumento de los costes.
+
+Los métodos de gestión de proyectos por lo general no consideran el grado y la complejidad de los aportes que realizan los desarrolladores y el riesgo que tiene asociada su eventual salida de un proyecto. Por ello, se requiere de métodos que permitan conocer la complejidad de los cambios que realizan, y permitan medir la concentración de conocimiento y el nivel de dependencia que se tiene de cada programador durante el desarrollo y mantenimiento del software.
+
+El artículo propone un método para medir el riesgo asociado a la salida de un programador de un proyecto de software. El método se basa en la hipótesis de que el grado de conocimiento de un programador sobre un sistema está relacionado con la complejidad de los cambios que realiza.
