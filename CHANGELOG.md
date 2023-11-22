@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [release-please](https://github.com/googleapis/release-please),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.1.0...v1.2.0) (2023-11-22)
+
+
+### Miscellaneous Chores
+
+* release 1.2.0 ([03a47fc](https://github.com/kevinah95/master-thesis-experiments/commit/03a47fc87b1b0324090d71fab8af614edfce7907))
+
 ## [1.1.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.0.0...v1.1.0) (2023-11-22)
 
 
