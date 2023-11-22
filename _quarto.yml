@@ -3,7 +3,6 @@ project:
   #execute-dir: project
 
 book:
-  reader-mode: true
   title: "master-thesis-experiments"
   author: 
     name: Kevin Hernández Rostrán
@@ -37,8 +36,6 @@ format:
     code-summary: "Ver código"
     theme: cosmo
     css: styles/tabulator.css
-  pdf:
-    documentclass: scrreprt
 
 freeze: true
 
