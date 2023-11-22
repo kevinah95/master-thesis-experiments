@@ -8,6 +8,9 @@ book:
   author: 
     name: Kevin Hernández Rostrán
     orcid: 0009-0001-7682-0350
+  url: https://kevinah95.github.io/master-thesis-experiments/
+  repo-url: https://github.com/kevinah95/master-thesis-experiments/
+  sharing: [twitter, facebook, linkedin]
   date: "11/10/2023"
   chapters:
     - index.qmd
@@ -36,6 +39,8 @@ format:
     css: styles/tabulator.css
   pdf:
     documentclass: scrreprt
+
+freeze: true
 
 editor: visual
 
