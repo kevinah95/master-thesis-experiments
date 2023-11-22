@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [release-please](https://github.com/googleapis/release-please),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.0.0...v1.1.0) (2023-11-22)
+
+
+### Features
+
+* Add all java sources ([d46e648](https://github.com/kevinah95/master-thesis-experiments/commit/d46e648eca86ccfe9804587202e9886392bbeffe))
+* Deploy in gh-pages ([00cb7e8](https://github.com/kevinah95/master-thesis-experiments/commit/00cb7e8832de1fb893d669c8564a0f63810c2a0b))
+
 ## 1.0.0 (2023-11-22)
 
 
