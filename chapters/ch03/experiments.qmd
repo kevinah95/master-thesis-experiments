@@ -1,155 +1,14 @@
-# Experimentos
+---
+title: "Experimentos"
+execute:
+  echo: false
+---
 
-## Paso 01 - Seleccionar el repositorio
-
-```{}
-```
-
-```{ojs}
-aq.from(selectedRepository[0].repository)
-  .view()
-```
-
-## **Paso 02 - Transformación de los datos**
-
-```{ojs}
-changes = selectedRepository[0].changes
-```
-
-```{ojs}
-aq.from(changes)
-  .select(aq.not('new_path', 'old_path', 'dev_name'))
-  .view()
-```
-
-### Limpieza de datos
-
-#### Limpiar devs
-
-```{ojs}
-changes_with_dev_key = {
-  const changes_with_dev_email_splitted = aq.from(changes)
-    .derive({ splitted: (d) => op.split(d.dev_email, "@") })
-    .derive({ username: (d) => op.lower(d.splitted[0]) }) // normalize to lower
-    .derive({ domain: (d) => op.lower(d.splitted[1]) }) // normalize to lower
-    .derive({
-      new_email: (d) => d.username + (d.domain ? "@" + d.domain : "")
-    });
-
-  const changes_with_dev_email_splitted_objects =
-    changes_with_dev_email_splitted.objects();
-
-  const use_username =
-    _.chain(changes_with_dev_email_splitted_objects.map((d) => d.username))
-      .uniq()
-      .size()
-      .value() ==
-    _.chain(changes_with_dev_email_splitted_objects.map((d) => d.new_email))
-      .uniq()
-      .size()
-      .value();
-
-  return aq.from(changes_with_dev_email_splitted)
-    .derive({
-      dev_key: aq.escape((d) => (use_username ? d.username : d.new_email))
-    })
-    //.view();
-}
-```
-
-```{ojs}
-devs_by_email = changes_with_dev_key
- .dedupe('dev_key')
- .select('dev_key')
- .filter(d => d.dev_key !== "noreply@github.com" && d.dev_key !== "noreply") // filter noreply github
- .orderby('dev_key')
- .array('dev_key')
-```
-
-## Paso 03 - Visualizaciones
+## Visualizaciones
 
 ### Complejidad única
 
-```{ojs}
-unique_cx_metrics = {
-  const grouped_data = d3.hierarchy(
-    changes_with_dev_key
-      .groupby("_package", "_class", "method")
-      .orderby(aq.desc("date"))
-      .derive({ last: aq.rolling((d) => op.first_value(d.cur_m_cx)) })
-      .orderby("date")
-      .groupby("_package", "_class", "method", "last")
-      .pivot({ key: (d) => d.dev_key }, { value: (d) => op.any(d.last) || 0 })
-      .groupby("_package", "_class")
-      .objects({ grouped: "map" })
-  );
-
-  const tree_summary_data = grouped_data.copy().eachAfter((d) => {
-    devs_by_email.forEach((k) => {
-      d[k] = d.children ? _.sumBy(d.children, k) : d.data[k] || 0;
-    });
-
-    d["cx"] = d.children ? _.sumBy(d.children, "cx") : d.data["last"] || 0;
-
-    d.title = d.data[0] || d.data.method;
-  });
-
-  const { devs_with_zero, devs_with_non_zero } = _.chain(devs_by_email)
-    .partition((key) => _.every(tree_summary_data.children, (d) => d[key] == 0))
-    .map(_.sortBy)
-    .thru((v) => ({ devs_with_zero: v[0], devs_with_non_zero: v[1] }))
-    .value();
-
-  const picked = _.concat(devs_with_non_zero, ["cx"]);
-
-  const total_cx_data = _.pick(tree_summary_data, picked);
-
-  const percentage_cx_data = _.transform(
-    total_cx_data,
-    (result, value, key) => {
-      result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
-    },
-    {}
-  );
-
-  const unique_cx_data = calculate_unique_cx_summary(
-    tree_summary_data.children,
-    devs_with_zero,
-    devs_with_non_zero
-  );
-
-  const percentage_unique_cx_data = _.transform(
-    unique_cx_data,
-    (result, value, key) => {
-      result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
-    },
-    {}
-  );
-
-  const knowledge_remaining = calculate_knowledge_remaining(tree_summary_data.children,devs_with_non_zero);
-  const knowledge_remaining_percentage = 100 - (+((knowledge_remaining * 100) / total_cx_data["cx"]).toFixed(2))
-
-  return {
-    grouped_data,
-    tree_summary_data,
-    devs_with_zero,
-    devs_with_non_zero,
-    total_cx_data,
-    percentage_cx_data,
-    unique_cx_data,
-    percentage_unique_cx_data,
-    knowledge_remaining,
-    knowledge_remaining_percentage
-  };
-}
-```
-
-```{ojs}
-d3.sum(Object.values(unique_cx_metrics.percentage_unique_cx_data))
-```
-
-:::{.column-page}
-
+::: column-page
 ```{ojs}
 //| panel: sidebar
 
@@ -171,6 +30,7 @@ stadistics = {
               vl.x().fieldQ('metric')
             )
             .width(160)
+            .height(400)
             .render()
 }
 
@@ -327,7 +187,6 @@ t = {
   return holderEl;
 }
 ```
-
 :::
 
 ## Apéndice
@@ -335,7 +194,127 @@ t = {
 ### Variables y config
 
 ```{ojs}
+changes = selectedRepository[0].changes
+```
+
+```{ojs}
 mutable footerdata = null;
+```
+
+```{ojs}
+unique_cx_metrics = {
+  const grouped_data = d3.hierarchy(
+    changes_with_dev_key
+      .groupby("_package", "_class", "method")
+      .orderby(aq.desc("date"))
+      .derive({ last: aq.rolling((d) => op.first_value(d.cur_m_cx)) })
+      .orderby("date")
+      .groupby("_package", "_class", "method", "last")
+      .pivot({ key: (d) => d.dev_key }, { value: (d) => op.any(d.last) || 0 })
+      .groupby("_package", "_class")
+      .objects({ grouped: "map" })
+  );
+
+  const tree_summary_data = grouped_data.copy().eachAfter((d) => {
+    devs_by_email.forEach((k) => {
+      d[k] = d.children ? _.sumBy(d.children, k) : d.data[k] || 0;
+    });
+
+    d["cx"] = d.children ? _.sumBy(d.children, "cx") : d.data["last"] || 0;
+
+    d.title = d.data[0] || d.data.method;
+  });
+
+  const { devs_with_zero, devs_with_non_zero } = _.chain(devs_by_email)
+    .partition((key) => _.every(tree_summary_data.children, (d) => d[key] == 0))
+    .map(_.sortBy)
+    .thru((v) => ({ devs_with_zero: v[0], devs_with_non_zero: v[1] }))
+    .value();
+
+  const picked = _.concat(devs_with_non_zero, ["cx"]);
+
+  const total_cx_data = _.pick(tree_summary_data, picked);
+
+  const percentage_cx_data = _.transform(
+    total_cx_data,
+    (result, value, key) => {
+      result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
+    },
+    {}
+  );
+
+  const unique_cx_data = calculate_unique_cx_summary(
+    tree_summary_data.children,
+    devs_with_zero,
+    devs_with_non_zero
+  );
+
+  const percentage_unique_cx_data = _.transform(
+    unique_cx_data,
+    (result, value, key) => {
+      result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
+    },
+    {}
+  );
+
+  const knowledge_remaining = calculate_knowledge_remaining(tree_summary_data.children,devs_with_non_zero);
+  const knowledge_remaining_percentage = 100 - (+((knowledge_remaining * 100) / total_cx_data["cx"]).toFixed(2))
+
+  return {
+    grouped_data,
+    tree_summary_data,
+    devs_with_zero,
+    devs_with_non_zero,
+    total_cx_data,
+    percentage_cx_data,
+    unique_cx_data,
+    percentage_unique_cx_data,
+    knowledge_remaining,
+    knowledge_remaining_percentage
+  };
+}
+```
+
+#### Limpiar devs
+
+```{ojs}
+changes_with_dev_key = {
+  const changes_with_dev_email_splitted = aq.from(changes)
+    .derive({ splitted: (d) => op.split(d.dev_email, "@") })
+    .derive({ username: (d) => op.lower(d.splitted[0]) }) // normalize to lower
+    .derive({ domain: (d) => op.lower(d.splitted[1]) }) // normalize to lower
+    .derive({
+      new_email: (d) => d.username + (d.domain ? "@" + d.domain : "")
+    });
+
+  const changes_with_dev_email_splitted_objects =
+    changes_with_dev_email_splitted.objects();
+
+  const use_username =
+    _.chain(changes_with_dev_email_splitted_objects.map((d) => d.username))
+      .uniq()
+      .size()
+      .value() ==
+    _.chain(changes_with_dev_email_splitted_objects.map((d) => d.new_email))
+      .uniq()
+      .size()
+      .value();
+
+  return aq.from(changes_with_dev_email_splitted)
+    .derive({
+      dev_key: aq.escape((d) => (use_username ? d.username : d.new_email))
+    })
+    //.view();
+}
+```
+
+```{ojs}
+devs_by_email = changes_with_dev_key
+ .dedupe('dev_key')
+ .select('dev_key')
+ .filter(d => d.dev_key !== "noreply@github.com" && d.dev_key !== "noreply") // filter noreply github
+ .orderby('dev_key')
+ .array('dev_key')
 ```
 
 ### Tabulator
@@ -564,26 +543,74 @@ calculate_knowledge_remaining = (data, devs_with_non_zero) => {
 ### Fetchers
 
 ```{ojs}
-repos = [
-  jgit_cookbook
-]
-```
-
-```{ojs}
-jgit_cookbook = ({
-  repository: {name: "jgit_cookbook"},
+repos = {
+  const jgit_cookbook = {
+    repository: { name: "java.jgit_cookbook" },
+    changes: await FileAttachment("./../../data/java/changes_jgit_cookbook.json").json()
+  };
   
-  changes: await FileAttachment("./../../data/changes_jgit_cookbook.json").json(),
-})
+  const uCrop = {
+    repository: { name: "java.uCrop" },
+    changes: await FileAttachment("./../../data/java/changes_uCrop.json").json()
+  };
+  
+  const java_jwt = {
+    repository: { name: "java.java_jwt" },
+    changes: await FileAttachment("./../../data/java/changes_java_jwt.json").json()
+  };
+  
+  const mapstruct = {
+    repository: { name: "java.mapstruct" },
+    changes: await FileAttachment("./../../data/java/changes_mapstruct.json").json()
+  };
+
+  const modelmapper = {
+    repository: { name: "java.modelmapper" },
+    changes: await FileAttachment("./../../data/java/changes_modelmapper.json").json()
+  };
+  
+  const javacv = {
+    repository: { name: "java.javacv" },
+    changes: await FileAttachment("./../../data/java/changes_javacv.json").json()
+  };
+  
+  const spatial4j = {
+    repository: { name: "java.spatial4j" },
+    changes: await FileAttachment("./../../data/java/changes_spatial4j.json").json()
+  };
+  
+  const google_http_java_client = {
+    repository: { name: "java.google_http_java_client" },
+    changes: await FileAttachment("./../../data/java/changes_google_http_java_client.json").json()
+  };
+  
+  const jadx = {
+    repository: { name: "java.jadx" },
+    changes: await FileAttachment("./../../data/java/changes_jadx.json").json()
+  };
+  
+  
+  return [
+    jgit_cookbook, 
+    uCrop,
+    java_jwt,
+    mapstruct,
+    modelmapper,
+    javacv,
+    spatial4j,
+    google_http_java_client,
+    jadx
+  ];
+}
 ```
 
-### **Imports**
+### Imports
 
 ```{ojs}
 d3 = require("d3@7")
 ```
 
-### **Notebook Imports**
+### Notebook Imports
 
 ```{ojs}
 import { aq, op } from '@uwdata/arquero'

@@ -26,6 +26,10 @@ format:
       margin-width: 300px
       gutter-width: 1.5rem
     page-layout: full
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
     code-fold: true
     code-summary: "Ver código"
     theme: cosmo
