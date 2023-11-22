@@ -10,7 +10,6 @@ book:
   url: https://kevinah95.github.io/master-thesis-experiments/
   repo-url: https://github.com/kevinah95/master-thesis-experiments/
   sharing: [twitter, facebook, linkedin]
-  date: "11/10/2023"
   chapters:
     - index.qmd
     - chapters/ch01/intro.qmd
