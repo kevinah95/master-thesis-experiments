@@ -1,0 +1,13 @@
+# Estructura/dependencias
+
+Este proyecto depende de:
+
+-   [GAST](https://github.com/Softlab-TEC/GAST)
+
+-   [Mapper](https://github.com/Softlab-TEC/Mapper)
+
+-   [Analyzer](https://github.com/Softlab-TEC/Analyzer)
+
+Para minar se utiliza:
+
+-   [repositoryminer](https://github.com/kevinah95/repositoryminer)
