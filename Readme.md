@@ -1,5 +1,8 @@
 # Experimentos - Metodología para el análisis y medición automática de sistemas de software
 
+![GitHub release](https://img.shields.io/github/v/release/kevinah95/master-thesis-experiments)
+
+
 Repositorio para construir los experimentos de mi tesis *Metodología para el análisis y medición automáticos de sistemas de software* utilizando [quarto](https://quarto.org/).
 
 ## Renderizar
