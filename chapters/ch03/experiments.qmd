@@ -30,7 +30,7 @@ stadistics = {
               vl.x().fieldQ('metric')
             )
             .width(160)
-            .height(400)
+            .height(500)
             .render()
 }
 
@@ -589,9 +589,56 @@ repos = {
     changes: await FileAttachment("./../../data/java/changes_jadx.json").json()
   };
   
+  const cs_elsa_core = ({
+    repository: {name: "cs.elsa_core"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_elsa-core.json").json()
+  });
+  
+  const cs_lively = ({
+    repository: {name: "lively"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_lively.json").json()
+  });
+  
+  const cs_changes_m_q_t_tnet = ({
+    repository: {name: "cs.MQTTNet"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_m_q_t_tnet.json").json()
+  });
+  
+  
+  const cs_changes_markdig = ({
+    repository: {name: "cs.markDig"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_markdig.json").json()
+  });
+  
+  const cs_changes_n_swag = ({
+    repository: {name: "cs.NSwag"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_n_swag.json").json()
+  });
+  
+  const cs_changes_pythonnet = ({
+    repository: {name: "cs.PythonNet"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_pythonnet.json").json()
+  });
+  
+  const cs_changes_terminal_gui = ({
+    repository: {name: "cs.Terminal.Gui"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_terminal._gui.json").json()
+  });
+  
+  const cs_changes_unity_library = ({
+    repository: {name: "cs.UnityLibrary"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_unity_library.json").json()
+  });
+  
+  const cs_changes_winAcme = ({
+    repository: {name: "cs.Win-Acme"},
+    changes: await FileAttachment("./../../data/cs/cs_changes_win-acme.json").json()
+  });
+
+  
   
   return [
-    jgit_cookbook, 
+    jgit_cookbook,
     uCrop,
     java_jwt,
     mapstruct,
@@ -599,7 +646,16 @@ repos = {
     javacv,
     spatial4j,
     google_http_java_client,
-    jadx
+    jadx,
+    cs_elsa_core,
+    cs_lively,
+    cs_changes_m_q_t_tnet,
+    cs_changes_markdig,
+    cs_changes_n_swag,
+    cs_changes_pythonnet,
+    cs_changes_terminal_gui,
+    cs_changes_unity_library,
+    cs_changes_winAcme
   ];
 }
 ```
