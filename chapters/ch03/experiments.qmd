@@ -2,11 +2,7 @@
 
 ## Paso 01 - Seleccionar el repositorio
 
-```{ojs}
-viewof selectedRepository = Inputs.select(
-  d3.group(repos, (repo) => repo.repository.name),
-  { label: "Elegir repositorio" }
-)
+```{}
 ```
 
 ```{ojs}
@@ -152,11 +148,37 @@ unique_cx_metrics = {
 d3.sum(Object.values(unique_cx_metrics.percentage_unique_cx_data))
 ```
 
+:::{.column-page}
+
 ```{ojs}
+//| panel: sidebar
+
+viewof selectedRepository = Inputs.select(
+  d3.group(repos, (repo) => repo.repository.name),
+  { label: "Elegir repositorio" }
+)
+
+stadistics = {
+  
+  const data2 = footerdata.filter(v => v.title === "Complejidad única")
+  
+  const df22 = aq.from(data2).fold(aq.not('title', 'cx'), { as: ['dev', 'metric'] })
+  
+  return vl.markBar()
+            .data(df22)
+            .encode(
+              vl.y().fieldN('dev'),
+              vl.x().fieldQ('metric')
+            )
+            .width(160)
+            .render()
+}
+
 viewof riskPercentile = Inputs.range([0, 100], {step: 1, label: "Percentil de riesgo"})
 ```
 
 ```{ojs}
+//| panel: fill
 t = {
   const holderEl = document.createElement("div");
 
@@ -203,9 +225,9 @@ t = {
     ).scrollLeft = left;
   });
 
-  //footer_table.on("dataProcessed", function(){
-  //  mutable tabledata = footer_table.getData();
-  //});
+  footer_table.on("dataProcessed", function(){
+    mutable footerdata = footer_table.getData();
+  });
 
 
   // cell edit
@@ -306,7 +328,15 @@ t = {
 }
 ```
 
+:::
+
 ## Apéndice
+
+### Variables y config
+
+```{ojs}
+mutable footerdata = null;
+```
 
 ### Tabulator
 
@@ -545,11 +575,6 @@ jgit_cookbook = ({
   
   changes: await FileAttachment("./../../data/changes_jgit_cookbook.json").json(),
 })
-
-```
-
-```{r}
-getwd()
 ```
 
 ### **Imports**

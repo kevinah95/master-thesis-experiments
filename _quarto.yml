@@ -3,6 +3,7 @@ project:
   #execute-dir: project
 
 book:
+  reader-mode: true
   title: "master-thesis-experiments"
   author: 
     name: Kevin Hernández Rostrán
@@ -19,6 +20,12 @@ bibliography: references.bib
 
 format:
   html:
+    grid:
+      sidebar-width: 300px
+      body-width: 900px
+      margin-width: 300px
+      gutter-width: 1.5rem
+    page-layout: full
     code-fold: true
     code-summary: "Ver código"
     theme: cosmo
