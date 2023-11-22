@@ -1,21 +1,28 @@
 project:
   type: book
+  #execute-dir: project
 
 book:
   title: "master-thesis-experiments"
-  author: "Norah Jones"
+  author: 
+    name: Kevin Hernández Rostrán
+    orcid: 0009-0001-7682-0350
   date: "11/10/2023"
   chapters:
     - index.qmd
     - chapters/ch01/intro.qmd
     - chapters/ch02/structure.qmd
+    - chapters/ch03/experiments.qmd
     - chapters/references.qmd
 
 bibliography: references.bib
 
 format:
   html:
+    code-fold: true
+    code-summary: "Ver código"
     theme: cosmo
+    css: styles/tabulator.css
   pdf:
     documentclass: scrreprt
 

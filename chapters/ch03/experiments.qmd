@@ -1,0 +1,565 @@
+# Experimentos
+
+## Paso 01 - Seleccionar el repositorio
+
+```{ojs}
+viewof selectedRepository = Inputs.select(
+  d3.group(repos, (repo) => repo.repository.name),
+  { label: "Elegir repositorio" }
+)
+```
+
+```{ojs}
+aq.from(selectedRepository[0].repository)
+  .view()
+```
+
+## **Paso 02 - Transformación de los datos**
+
+```{ojs}
+changes = selectedRepository[0].changes
+```
+
+```{ojs}
+aq.from(changes)
+  .select(aq.not('new_path', 'old_path', 'dev_name'))
+  .view()
+```
+
+### Limpieza de datos
+
+#### Limpiar devs
+
+```{ojs}
+changes_with_dev_key = {
+  const changes_with_dev_email_splitted = aq.from(changes)
+    .derive({ splitted: (d) => op.split(d.dev_email, "@") })
+    .derive({ username: (d) => op.lower(d.splitted[0]) }) // normalize to lower
+    .derive({ domain: (d) => op.lower(d.splitted[1]) }) // normalize to lower
+    .derive({
+      new_email: (d) => d.username + (d.domain ? "@" + d.domain : "")
+    });
+
+  const changes_with_dev_email_splitted_objects =
+    changes_with_dev_email_splitted.objects();
+
+  const use_username =
+    _.chain(changes_with_dev_email_splitted_objects.map((d) => d.username))
+      .uniq()
+      .size()
+      .value() ==
+    _.chain(changes_with_dev_email_splitted_objects.map((d) => d.new_email))
+      .uniq()
+      .size()
+      .value();
+
+  return aq.from(changes_with_dev_email_splitted)
+    .derive({
+      dev_key: aq.escape((d) => (use_username ? d.username : d.new_email))
+    })
+    //.view();
+}
+```
+
+```{ojs}
+devs_by_email = changes_with_dev_key
+ .dedupe('dev_key')
+ .select('dev_key')
+ .filter(d => d.dev_key !== "noreply@github.com" && d.dev_key !== "noreply") // filter noreply github
+ .orderby('dev_key')
+ .array('dev_key')
+```
+
+## Paso 03 - Visualizaciones
+
+### Complejidad única
+
+```{ojs}
+unique_cx_metrics = {
+  const grouped_data = d3.hierarchy(
+    changes_with_dev_key
+      .groupby("_package", "_class", "method")
+      .orderby(aq.desc("date"))
+      .derive({ last: aq.rolling((d) => op.first_value(d.cur_m_cx)) })
+      .orderby("date")
+      .groupby("_package", "_class", "method", "last")
+      .pivot({ key: (d) => d.dev_key }, { value: (d) => op.any(d.last) || 0 })
+      .groupby("_package", "_class")
+      .objects({ grouped: "map" })
+  );
+
+  const tree_summary_data = grouped_data.copy().eachAfter((d) => {
+    devs_by_email.forEach((k) => {
+      d[k] = d.children ? _.sumBy(d.children, k) : d.data[k] || 0;
+    });
+
+    d["cx"] = d.children ? _.sumBy(d.children, "cx") : d.data["last"] || 0;
+
+    d.title = d.data[0] || d.data.method;
+  });
+
+  const { devs_with_zero, devs_with_non_zero } = _.chain(devs_by_email)
+    .partition((key) => _.every(tree_summary_data.children, (d) => d[key] == 0))
+    .map(_.sortBy)
+    .thru((v) => ({ devs_with_zero: v[0], devs_with_non_zero: v[1] }))
+    .value();
+
+  const picked = _.concat(devs_with_non_zero, ["cx"]);
+
+  const total_cx_data = _.pick(tree_summary_data, picked);
+
+  const percentage_cx_data = _.transform(
+    total_cx_data,
+    (result, value, key) => {
+      result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
+    },
+    {}
+  );
+
+  const unique_cx_data = calculate_unique_cx_summary(
+    tree_summary_data.children,
+    devs_with_zero,
+    devs_with_non_zero
+  );
+
+  const percentage_unique_cx_data = _.transform(
+    unique_cx_data,
+    (result, value, key) => {
+      result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
+    },
+    {}
+  );
+
+  const knowledge_remaining = calculate_knowledge_remaining(tree_summary_data.children,devs_with_non_zero);
+  const knowledge_remaining_percentage = 100 - (+((knowledge_remaining * 100) / total_cx_data["cx"]).toFixed(2))
+
+  return {
+    grouped_data,
+    tree_summary_data,
+    devs_with_zero,
+    devs_with_non_zero,
+    total_cx_data,
+    percentage_cx_data,
+    unique_cx_data,
+    percentage_unique_cx_data,
+    knowledge_remaining,
+    knowledge_remaining_percentage
+  };
+}
+```
+
+```{ojs}
+d3.sum(Object.values(unique_cx_metrics.percentage_unique_cx_data))
+```
+
+```{ojs}
+viewof riskPercentile = Inputs.range([0, 100], {step: 1, label: "Percentil de riesgo"})
+```
+
+```{ojs}
+t = {
+  const holderEl = document.createElement("div");
+
+  // tag ids
+  const header_container_id = "unique_header";
+  const body_container_id = "unique_body";
+  const footer_container_id = "unique_footer";
+
+  // create
+  const header_table = create_header(unique_cx_metrics, header_container_id);
+  const body_table = create_body(unique_cx_metrics, body_container_id);
+  const footer_table = create_footer(unique_cx_metrics, footer_container_id);
+
+  // append to holder
+  holderEl.appendChild(header_table.element);
+  holderEl.appendChild(body_table.element);
+  holderEl.appendChild(footer_table.element);
+
+  // helper to support scrolling
+  header_table.on("scrollHorizontal", function (left) {
+    document.querySelector(
+      `#${body_container_id} .tabulator-tableholder`
+    ).scrollLeft = left;
+    document.querySelector(
+      `#${footer_container_id} .tabulator-tableholder`
+    ).scrollLeft = left;
+  });
+
+  body_table.on("scrollHorizontal", function (left) {
+    document.querySelector(
+      `#${header_container_id} .tabulator-tableholder`
+    ).scrollLeft = left;
+    document.querySelector(
+      `#${footer_container_id} .tabulator-tableholder`
+    ).scrollLeft = left;
+  });
+
+  footer_table.on("scrollHorizontal", function (left) {
+    document.querySelector(
+      `#${header_container_id} .tabulator-tableholder`
+    ).scrollLeft = left;
+    document.querySelector(
+      `#${body_container_id} .tabulator-tableholder`
+    ).scrollLeft = left;
+  });
+
+  //footer_table.on("dataProcessed", function(){
+  //  mutable tabledata = footer_table.getData();
+  //});
+
+
+  // cell edit
+  header_table.on("cellEdited", function (cell) {
+    //cell - cell component
+    const cellValue = cell.getValue();
+    const field = cell.getField();
+    console.log(cellValue, field)
+
+    const tree_table_data = body_table.getData();
+
+    const footer_table_data = footer_table.getData();
+
+    // body calcs
+
+    //console.log('tree_table_data',tree_table_data)
+
+    const new_tree = tree_table_data.map((p, p_index) => {
+      p[field] = cellValue
+        ? unique_cx_metrics.tree_summary_data.children[p_index][field]
+        : 0;
+      p.children = p.children.map((c, c_index) => {
+        c[field] = cellValue
+          ? unique_cx_metrics.tree_summary_data.children[p_index].children[
+              c_index
+            ][field]
+          : 0;
+        c.children = c.children.map((m, m_index) => {
+          m[field] = cellValue
+            ? unique_cx_metrics.tree_summary_data.children[p_index].children[
+                c_index
+              ].children[m_index][field]
+            : 0;
+          return m;
+        });
+        return c;
+      });
+      return p;
+    });
+
+    //console.log('new_tree',new_tree)
+
+    // footer calcs
+    footer_table_data[0][field] = cellValue
+      ? unique_cx_metrics.tree_summary_data[field]
+      : 0;
+
+    const total_cx_data = footer_table_data[0];
+
+    _.forIn(total_cx_data, (value, key) => {
+      if (key != "cx" && key != "title") {
+        footer_table_data[1][key] = +(
+          (value * 100) /
+          total_cx_data["cx"]
+        ).toFixed(2);
+      }
+    });
+
+    //console.log(footer_table_data);
+
+    const unique_cx_data = calculate_unique_cx_summary(
+      new_tree,
+      unique_cx_metrics.devs_with_zero,
+      unique_cx_metrics.devs_with_non_zero
+    );
+
+    footer_table_data[2] = { ...unique_cx_data, title: "Complejidad única" };
+    
+
+    const percentage_unique_cx_data = _.transform(
+      unique_cx_data,
+      (result, value, key) => {
+        result[key] = +((value * 100) / total_cx_data["cx"]).toFixed(2);
+      },
+      {}
+    );
+
+    footer_table_data[3] = {
+      ...percentage_unique_cx_data,
+      title: "Complejidad única (%)"
+    };
+
+    const knowledge_remaining = calculate_knowledge_remaining(new_tree, unique_cx_metrics.devs_with_non_zero);
+
+    const knowledge_remaining_percentage = 100 - (+((knowledge_remaining * 100) / total_cx_data["cx"]).toFixed(2))
+
+    footer_table_data[4] = {
+      cx: knowledge_remaining_percentage,
+      title: "Conocimiento restante"
+    };
+
+    footer_table.replaceData(footer_table_data);
+    body_table.replaceData(tree_table_data);
+  });
+
+  // return
+  return holderEl;
+}
+```
+
+## Apéndice
+
+### Tabulator
+
+```{ojs}
+Tabulator = require("tabulator-tables@5.5.2")
+```
+
+### Helper Functions
+
+```{ojs}
+create_header = (metrics, containerId) => {
+  const data = _.chain(metrics.devs_with_non_zero)
+    .reduce((p, v) => ({ ...p, [v]: true }), {})
+    .thru((v) => [v])
+    .value();
+  
+  const container = document.createElement("DIV");
+  container.id = containerId;
+  const table = new Tabulator(container, {
+    data: data,
+    layout: "fitDataStretch",
+    //height: 260,
+    headerSort: false,
+    nestedFieldSeparator: false,
+    columns: [
+      {
+        title: "Software Item",
+        headerSort: false,
+        width: 200,
+        responsive: 0,
+        frozen: true
+      },
+      ...metrics.devs_with_non_zero.map((d) => ({
+        title: d,
+        field: d,
+        hozAlign: "center",
+        headerSort: false,
+        editor: true,
+        width: 50,
+        headerVertical: "flip",
+        formatter: "tickCross"
+      })),
+      { title: "Complejidad", width: 150, headerSort: false }
+    ]
+  });
+  return table;
+}
+```
+
+```{ojs}
+create_body = (metrics, containerId) => {
+  const data = _.cloneDeep(metrics.tree_summary_data).children;
+  //const footerElement = footer_table.element;
+  const container = document.createElement("DIV");
+  container.id = containerId;
+
+  const table = new Tabulator(container, {
+    data,
+    dataTree: true,
+    dataTreeChildField: "children",
+    height: 350,
+    headerVisible: false, 
+    layout: "fitDataStretch",
+    nestedFieldSeparator: false,
+    columns: [
+      {
+        title: "Software Item",
+        field: "title",
+        width: 200,
+        responsive: 0,
+        frozen: true
+      },
+
+      ...metrics.devs_with_non_zero.map((d) => ({
+        ["title"]: d,
+        ["field"]: d,
+        width: 50,
+        headerVertical: "flip"
+      })),
+      { title: "Complejidad", field: "cx", width: 150 }
+    ],
+    //footerElement: footerElement
+  });
+
+  return table;
+}
+```
+
+```{ojs}
+create_footer = (metrics, containerId) => {
+  const data = [
+    {
+      title: "Complejidad total",
+      ...metrics.total_cx_data
+    },
+    {
+      title: "Complejidad total (%)",
+      ...metrics.percentage_cx_data
+    },
+    {
+      title: "Complejidad única",
+      ...metrics.unique_cx_data
+    },
+    {
+      title: "Complejidad única (%)",
+      ...metrics.percentage_unique_cx_data
+    },
+    {
+      title: "Conocimiento restante",
+      cx: metrics.knowledge_remaining_percentage
+    }
+  ];
+
+  const container = document.createElement("DIV");
+  container.className = "tabulator-footer";
+  container.id = containerId;
+  const table = new Tabulator(container, {
+    data,
+    //height: 150,
+    layout: "fitDataStretch",
+    headerVisible: false,
+    nestedFieldSeparator: false,
+    cssClass: "tabulator-footer",
+    rowFormatter: function (row) {
+      const row_data = row.getData();
+      
+      if (row_data.title == "Conocimiento restante") {
+        if(row_data.cx < riskPercentile){
+          row.getElement().style.backgroundColor = "#ff0000";
+          row.getElement().style.color = "#fff";
+          row.getElement().style.fontWeight = "bold";
+        }
+      }
+    },
+    columns: [
+      {
+        title: "Software Item",
+        field: "title",
+        width: 200,
+        responsive: 0,
+        frozen: true
+      },
+      ...metrics.devs_with_non_zero.map((d) => ({
+        ["title"]: d,
+        ["field"]: d,
+        width: 50,
+        headerVertical: "flip"
+      })),
+      { title: "Complejidad", field: "cx", width: 150 }
+    ]
+  });
+
+  return table;
+}
+```
+
+```{ojs}
+calculate_unique_cx_summary = (data, devs_with_zero, devs_with_non_zero) => {
+  const picked = _.concat(devs_with_non_zero);
+
+  let map = devs_with_non_zero.reduce((p, c) => {
+    return { ...p, [c]: 0 };
+  }, {});
+
+  //let cx = 0;
+  data.forEach((p, p_index) => {
+    p.children.forEach((c, c_index) => {
+      c.children.forEach((m, m_index) => {
+        //console.log(m)
+        const element = _.pick(m, picked);
+        const values = Object.values(element);
+        //console.log(element)
+        //console.log(values)
+        
+        const max = _.max(values);
+        const sum = _.sum(values);
+        const can = max == sum;
+        if (can && max != 0) {
+          //console.log('max',max, 'sum' , sum)
+          for (const [key, value] of Object.entries(element)) {
+            if (value == max) {
+              //console.log(key, value)
+              map[key] += value;
+              //console.log(map)
+              //cx = value;
+              break;
+            }
+          }
+        }
+      });
+    });
+  });
+
+  //map['cx'] = cx;
+
+  return map;
+}
+```
+
+```{ojs}
+calculate_knowledge_remaining = (data, devs_with_non_zero) => {
+  const picked = _.concat(devs_with_non_zero);
+
+  let result = 0;
+
+  data.forEach((p, p_index) => {
+    p.children.forEach((c, c_index) => {
+      c.children.forEach((m, m_index) => {
+        const element = _.pick(m, picked);
+        const values = Object.values(element);
+        
+        const all_zeros = _.every(values, d => d == 0);
+        
+        if (all_zeros) {
+          result += m['cx']
+        }
+      });
+    });
+  });
+
+  return result;
+}
+```
+
+### Fetchers
+
+```{ojs}
+repos = [
+  jgit_cookbook
+]
+```
+
+```{ojs}
+jgit_cookbook = ({
+  repository: {name: "jgit_cookbook"},
+  
+  changes: await FileAttachment("./../../data/changes_jgit_cookbook.json").json(),
+})
+
+```
+
+```{r}
+getwd()
+```
+
+### **Imports**
+
+```{ojs}
+d3 = require("d3@7")
+```
+
+### **Notebook Imports**
+
+```{ojs}
+import { aq, op } from '@uwdata/arquero'
+```
