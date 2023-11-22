@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [release-please](https://github.com/googleapis/release-please),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.4.0...v1.5.0) (2023-11-22)
+
+
+### Features
+
+* Add CSharp projects ([6485409](https://github.com/kevinah95/master-thesis-experiments/commit/6485409c2f9baac13faf37d39aa65ab91f8772c0))
+
 ## [1.4.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.3.0...v1.4.0) (2023-11-22)
 
 
