@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>master-thesis-experiments - 1&nbsp; Instalación</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/ch02/architecture.html" rel="next">
+<link href="../../index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles/tabulator.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/ch01/install.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Instalación</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">master-thesis-experiments</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/kevinah95/master-thesis-experiments/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/ch01/install.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Instalación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/ch02/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arquitectura</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/ch03/experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Experimentos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-generación-de-datos-de-entrada" id="toc-sec-generación-de-datos-de-entrada" class="nav-link active" data-scroll-target="#sec-generación-de-datos-de-entrada"><span class="header-section-number">1.1</span> Generación de datos de entrada (Opcional)</a>
+  <ul class="collapse">
+  <li><a href="#install-sec-1.-instalar-gast" id="toc-install-sec-1.-instalar-gast" class="nav-link" data-scroll-target="#install-sec-1.-instalar-gast"><span class="header-section-number">1.1.1</span> Instalar GAST</a></li>
+  <li><a href="#install-install-sec-2.-instalar-mapper" id="toc-install-install-sec-2.-instalar-mapper" class="nav-link" data-scroll-target="#install-install-sec-2.-instalar-mapper"><span class="header-section-number">1.1.2</span> Instalar Mapper</a></li>
+  <li><a href="#install-sec-3.-instalar-analyzer" id="toc-install-sec-3.-instalar-analyzer" class="nav-link" data-scroll-target="#install-sec-3.-instalar-analyzer"><span class="header-section-number">1.1.3</span> Instalar Analyzer</a></li>
+  <li><a href="#install-sec-instalar-repositoryminer" id="toc-install-sec-instalar-repositoryminer" class="nav-link" data-scroll-target="#install-sec-instalar-repositoryminer"><span class="header-section-number">1.1.4</span> Instalar Repositoryminer</a></li>
+  <li><a href="#correr-repominerrunner" id="toc-correr-repominerrunner" class="nav-link" data-scroll-target="#correr-repominerrunner"><span class="header-section-number">1.1.5</span> Correr RepominerRunner</a></li>
+  <li><a href="#correr-api" id="toc-correr-api" class="nav-link" data-scroll-target="#correr-api"><span class="header-section-number">1.1.6</span> Correr API</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Instalación</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Para renderizar el libro usted mismo, siga estos pasos:</p>
+<ol type="1">
+<li><p>Clonar el repositorio <a href="https://github.com/kevinah95/master-thesis-experiments.git">kevinah95/master-thesis-experiments</a></p></li>
+<li><p>Instalar R Studio y Quarto.</p></li>
+<li><p>Correr el comando <code>make install</code></p></li>
+<li><p>Renderizar el html con <code>make html</code></p></li>
+<li><p>Correr el servidor <code>make serve</code></p></li>
+</ol>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datos de entrada
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este repositorio cuenta con datos previamente generados. Para generar datos de entrada nuevos es importante seguir los pasos de la sección <a href="#sec-generación-de-datos-de-entrada">Generación de datos de entrada</a>. Si no se requiere generar nuevos datos de entrada se puede saltar esa sección.</p>
+</div>
+</div>
+<section id="sec-generación-de-datos-de-entrada" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-generación-de-datos-de-entrada"><span class="header-section-number">1.1</span> Generación de datos de entrada (Opcional)</h2>
+<p>En esta sección se explica cómo instalar los proyectos para la generación de datos de entrada.</p>
+<section id="install-sec-1.-instalar-gast" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="install-sec-1.-instalar-gast"><span class="header-section-number">1.1.1</span> Instalar GAST</h3>
+<p>Este proyecto utiliza <a href="https://maven.apache.org/index.html">Maven</a>. Para utilizar las funcionalidades proporcionadas por este proyecto, se debe instalar la dependencia Maven de este proyecto en el repositorio local de Maven (p.ej. <code>~/.m2/repository</code>). Los pasos son los siguientes:</p>
+<ol type="1">
+<li>Clonar el repositorio <a href="https://github.com/Softlab-TEC/GAST">Softlab-TEC/GAST</a>.</li>
+<li>Cambiar de branch a <code>develop-GAST</code>.</li>
+<li>Correr <code>mvn install</code>.</li>
+</ol>
+<p>Este proceso instalará el proyecto en la siguiente dirección:</p>
+<ul>
+<li><code>~/.m2/repository/avib/coderetriever/avib.coderetriever.gast</code>.</li>
+</ul>
+</section>
+<section id="install-install-sec-2.-instalar-mapper" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="install-install-sec-2.-instalar-mapper"><span class="header-section-number">1.1.2</span> Instalar Mapper</h3>
+<p>Todas las dependencias se descargan automáticamente por Maven, pero una de esas dependencias, el proyecto GAST, debe ser instalado manualmente. Puede ver las dependencias de Maven en el archivo Pom.xml de este proyecto.</p>
+<p>Para ello, es importante realizar primero la <a href="#sec-1.-instalar-gast">Instalación del GAST</a>. Luego se pueden seguir los siguientes pasos:</p>
+<ol type="1">
+<li><p>Clonar el repositorio <a href="https://github.com/Softlab-TEC/Mapper">Softlab-TEC/Mapper</a>.</p></li>
+<li><p>Sustituir la dependencia por:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.core --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">groupId</span>&gt;org.eclipse.jdt&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">artifactId</span>&gt;org.eclipse.jdt.core&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">version</span>&gt;3.22.0&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">exclusions</span>&gt;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">exclusion</span>&gt;</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="co">&lt;!-- declare the exclusion here --&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">artifactId</span>&gt;org.eclipse.core.runtime&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">exclusion</span>&gt;</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">exclusion</span>&gt;</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="co">&lt;!-- declare the exclusion here --&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">artifactId</span>&gt;org.eclipse.equinox.common&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">exclusion</span>&gt;</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">exclusions</span>&gt;</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">dependency</span>&gt;</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">artifactId</span>&gt;org.eclipse.core.runtime&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">version</span>&gt;3.13.0&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">scope</span>&gt;compile&lt;/<span class="kw">scope</span>&gt;</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">exclusions</span>&gt;</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">exclusion</span>&gt;</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="co">&lt;!-- declare the exclusion here --&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">artifactId</span>&gt;org.eclipse.equinox.common&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">exclusion</span>&gt;</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">exclusions</span>&gt;</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">dependency</span>&gt;</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">artifactId</span>&gt;org.eclipse.equinox.common&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">version</span>&gt;3.14.100&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">scope</span>&gt;compile&lt;/<span class="kw">scope</span>&gt;</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Correr <code>mvn install</code>.</p></li>
+</ol>
+<p>Este proceso instalará el proyecto en la siguiente dirección:</p>
+<ul>
+<li><code>~/.m2/repository/avib/coderetriever/avib.coderetriever.mapper</code>.</li>
+</ul>
+</section>
+<section id="install-sec-3.-instalar-analyzer" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="install-sec-3.-instalar-analyzer"><span class="header-section-number">1.1.3</span> Instalar Analyzer</h3>
+<p>Todas las dependencias se descargan automáticamente por Maven, pero dos de esas dependencias, GAST y Mapper, deben ser instaladas manualmente. Puede ver las dependencias de Maven en el archivo Pom.xml de este proyecto.</p>
+<p>Para ello, es importante realizar primero la <a href="#sec-1.-instalar-gast">Instalación del GAST</a>, luego <a href="#sec-2.-instalar-mapper">Instalar Mapper</a>. Luego se pueden seguir los siguientes pasos:</p>
+<ol type="1">
+<li><p>Clonar el repositorio <a href="https://github.com/Softlab-TEC/Analyzer">Softlab-TEC/Analyzer</a>.</p></li>
+<li><p>Cambiar de branch a <code>develop-metrics</code>.</p></li>
+<li><p>Utilizar sdkman para instalar Java 8:</p>
+<pre><code># .sdkmanrc
+# Enable auto-env through the sdkman_auto_env config
+# Add key=value pairs of SDKs to use below
+java=8.0.352-amzn</code></pre></li>
+<li><p>Cambiar el <code>pom.xml</code> a Java 8:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">build</span>&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">plugins</span>&gt;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">plugin</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            ...</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">configuration</span>&gt;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">source</span>&gt;1.8&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">target</span>&gt;1.8&lt;/<span class="kw">target</span>&gt;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                ...</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">configuration</span>&gt;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">plugin</span>&gt;</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">plugins</span>&gt;</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">build</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>El archivo <code>src/main/java/metrics/overview/sizeandcomplexity/nom/NomMetric.java</code> va a fallar, entonces hay que agregar:</p>
+<ol type="1">
+<li>El import de <code>import org.apache.commons.lang3.StringUtils;</code>.</li>
+<li>Reemplazar <code>methodName.asText().isBlank()</code> a <code>StringUtils.isBlank(methodName.asText())</code>.</li>
+</ol></li>
+<li><p>Correr <code>mvn compile</code>.</p></li>
+<li><p>Correr <code>mvn install</code>.</p></li>
+</ol>
+<p>Este proceso instalará el proyecto en la siguiente dirección:</p>
+<ul>
+<li><code>~/.m2/repository/avib/coderetriever/avib.coderetriever.analyzer</code>.</li>
+</ul>
+</section>
+<section id="install-sec-instalar-repositoryminer" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="install-sec-instalar-repositoryminer"><span class="header-section-number">1.1.4</span> Instalar Repositoryminer</h3>
+<p>Luego de instalar los 3 proyectos anteriores (<a href="#sec-1.-instalar-gast">GAST</a>, <a href="#install-sec-2.-instalar-mapper">Mapper</a>, <a href="#sec-3.-instalar-analyzer">Analyzer</a>). Se necesita instalar <a href="https://github.com/kevinah95/repositoryminer">kevinah95/repositoryminer</a>. Para ello se pueden seguir estos pasos:</p>
+<ol type="1">
+<li><p>Clonar el repositorio <a href="https://github.com/kevinah95/repositoryminer">kevinah95/repositoryminer</a>.</p></li>
+<li><p>Este proyecto utiliza <a href="https://sdkman.io/usage#env">sdkman</a> para configurar el ambiente. Para instalar estos SDKs que faltan, basta con escribir:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sdk</span> env install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Para cambiar a la configuración presente en el archivo <code>.sdkmanrc</code>, simplemente ejecute el siguiente comando:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sdk</span> env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Este comando instalará Java 11 y Gradle 7.</p></li>
+<li><p>Correr el comando: <code>gradle build</code>.</p></li>
+<li><p>Correr el comando: <code>gradle publishToMavenLocal</code>.</p></li>
+</ol>
+<p>Este proceso instalará el proyecto en la siguiente dirección:</p>
+<ul>
+<li><code>~/.m2/repository/org/repositoryminer/core</code>.</li>
+</ul>
+</section>
+<section id="correr-repominerrunner" class="level3" data-number="1.1.5">
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="correr-repominerrunner"><span class="header-section-number">1.1.5</span> Correr RepominerRunner</h3>
+<p>Una vez instalados los proyectos anteriores (<a href="#sec-instalar-repositoryminer">Repositoryminer</a>, <a href="#sec-1.-instalar-gast">GAST</a>, <a href="#install-sec-2.-instalar-mapper">Mapper</a>, <a href="#sec-3.-instalar-analyzer">Analyzer</a>). Podemos correr el proyecto para la generación de datos de entrada:</p>
+<ol type="1">
+<li><p>Clonar el repositorio <a href="https://github.com/kevinah95/repominer-runner">kevinah95/repominer-runner</a>.</p></li>
+<li><p>Modificar la conexión con Mongo (<a href="https://github.com/kevinah95/repominer-runner/blob/master/src/main/java/org/example/Main.java#L27">línea 27</a>).</p></li>
+<li><p>Modificar la descripción del repositorio en estudio (<a href="https://github.com/kevinah95/repominer-runner/blob/9e22176e9b07e0cc7ea8af9f86cef13d66de98c0/src/main/java/org/example/Main.java#L35">línea 35</a>).</p></li>
+</ol>
+<p>Una vez que se haya ejecutado el procesamiento se almacenara en la base de datos Mongo, previamente configurada.</p>
+</section>
+<section id="correr-api" class="level3" data-number="1.1.6">
+<h3 data-number="1.1.6" class="anchored" data-anchor-id="correr-api"><span class="header-section-number">1.1.6</span> Correr API</h3>
+<p>Para poder extraer la información necesario como datos de entrada se puede utilizar un API. Un ejemplo de su implementación se encuentra en el repositorio <a href="https://github.com/kevinah95/nextjs-with-mongodb">kevinah95/nextjs-with-mongodb-api</a>. Para ejecutar el proyecto es necesario seguir estos pasos:</p>
+<ol type="1">
+<li><p>Clonar el repositorio <a href="https://github.com/kevinah95/nextjs-with-mongodb">kevinah95/nextjs-with-mongodb-api</a>.</p></li>
+<li><p>Renombrar el archivo <code>.env.local.example</code> por <code>.env.local</code>.</p></li>
+<li><p>Cambiar la variable de ambiente en el archivo <code>.env.local</code>:</p>
+<p><code>MONGODB_URI</code> - Cadena de conexión a MongoDB. Si se utiliza MongoDB Atlas, se puede encontrar haciendo clic en el botón “Conectar” del clúster.</p></li>
+<li><p>Ejecutar Next.js en modo de desarrollo:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run dev</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sino</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">yarn</span> install</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">yarn</span> dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>La aplicación debería estar funcionando en <a href="http://localhost:3000.">http://localhost:3000</a>. Puede hacer uso del API por ejemplo:</p>
+<ol type="1">
+<li><code>api/commits/:repositoryId</code>: Para obtener la lista de commits por repositorio.</li>
+<li><code>api/repositories</code>: Para obtener la información de los repositorios minados.</li>
+</ol></li>
+</ol>
+<p>La lista de commits funcionará como datos de entrada para este repositorio.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Prefacio</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapters/ch02/architecture.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arquitectura</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Instalación</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Para renderizar el libro usted mismo, siga estos pasos:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">kevinah95/master-thesis-experiments</span><span class="co">](https://github.com/kevinah95/master-thesis-experiments.git)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Instalar R Studio y Quarto.</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Correr el comando <span class="in">`make install`</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Renderizar el html con <span class="in">`make html`</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Correr el servidor <span class="in">`make serve`</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance="simple"}</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Datos de entrada</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>Este repositorio cuenta con datos previamente generados. Para generar datos de entrada nuevos es importante seguir los pasos de la sección <span class="co">[</span><span class="ot">Generación de datos de entrada</span><span class="co">](#sec-generación-de-datos-de-entrada)</span>. Si no se requiere generar nuevos datos de entrada se puede saltar esa sección.</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Generación de datos de entrada (Opcional) {#sec-generación-de-datos-de-entrada}</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>En esta sección se explica cómo instalar los proyectos para la generación de datos de entrada.</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Instalar GAST {#install-sec-1.-instalar-gast}</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>Este proyecto utiliza <span class="co">[</span><span class="ot">Maven</span><span class="co">](https://maven.apache.org/index.html)</span>. Para utilizar las funcionalidades proporcionadas por este proyecto, se debe instalar la dependencia Maven de este proyecto en el repositorio local de Maven (p.ej. <span class="in">`~/.m2/repository`</span>). Los pasos son los siguientes:</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">Softlab-TEC/GAST</span><span class="co">](https://github.com/Softlab-TEC/GAST)</span>.</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Cambiar de branch a <span class="in">`develop-GAST`</span>.</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Correr <span class="in">`mvn install`</span>.</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>Este proceso instalará el proyecto en la siguiente dirección:</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`~/.m2/repository/avib/coderetriever/avib.coderetriever.gast`</span>.</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### Instalar Mapper {#install-install-sec-2.-instalar-mapper}</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>Todas las dependencias se descargan automáticamente por Maven, pero una de esas dependencias, el proyecto GAST, debe ser instalado manualmente. Puede ver las dependencias de Maven en el archivo Pom.xml de este proyecto.</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>Para ello, es importante realizar primero la <span class="co">[</span><span class="ot">Instalación del GAST</span><span class="co">](#sec-1.-instalar-gast)</span>. Luego se pueden seguir los siguientes pasos:</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">Softlab-TEC/Mapper</span><span class="co">](https://github.com/Softlab-TEC/Mapper)</span>.</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Sustituir la dependencia por:</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    <span class="in">``` xml</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.core --&gt;</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">groupId</span>&gt;org.eclipse.jdt&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">artifactId</span>&gt;org.eclipse.jdt.core&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">version</span>&gt;3.22.0&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">exclusions</span>&gt;</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">exclusion</span>&gt;</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>                <span class="co">&lt;!-- declare the exclusion here --&gt;</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">artifactId</span>&gt;org.eclipse.core.runtime&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">exclusion</span>&gt;</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">exclusion</span>&gt;</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>                <span class="co">&lt;!-- declare the exclusion here --&gt;</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">artifactId</span>&gt;org.eclipse.equinox.common&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">exclusion</span>&gt;</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">exclusions</span>&gt;</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">dependency</span>&gt;</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">artifactId</span>&gt;org.eclipse.core.runtime&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">version</span>&gt;3.13.0&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">scope</span>&gt;compile&lt;/<span class="kw">scope</span>&gt;</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">exclusions</span>&gt;</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">exclusion</span>&gt;</span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>                <span class="co">&lt;!-- declare the exclusion here --&gt;</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">artifactId</span>&gt;org.eclipse.equinox.common&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">exclusion</span>&gt;</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">exclusions</span>&gt;</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">dependency</span>&gt;</span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">groupId</span>&gt;org.eclipse.platform&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">artifactId</span>&gt;org.eclipse.equinox.common&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">version</span>&gt;3.14.100&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">scope</span>&gt;compile&lt;/<span class="kw">scope</span>&gt;</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">dependency</span>&gt;</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Correr <span class="in">`mvn install`</span>.</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>Este proceso instalará el proyecto en la siguiente dirección:</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`~/.m2/repository/avib/coderetriever/avib.coderetriever.mapper`</span>.</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### Instalar Analyzer {#install-sec-3.-instalar-analyzer}</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>Todas las dependencias se descargan automáticamente por Maven, pero dos de esas dependencias, GAST y Mapper, deben ser instaladas manualmente. Puede ver las dependencias de Maven en el archivo Pom.xml de este proyecto.</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>Para ello, es importante realizar primero la <span class="co">[</span><span class="ot">Instalación del GAST</span><span class="co">](#sec-1.-instalar-gast)</span>, luego <span class="co">[</span><span class="ot">Instalar Mapper</span><span class="co">](#sec-2.-instalar-mapper)</span>. Luego se pueden seguir los siguientes pasos:</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">Softlab-TEC/Analyzer</span><span class="co">](https://github.com/Softlab-TEC/Analyzer)</span>.</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Cambiar de branch a <span class="in">`develop-metrics`</span>.</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Utilizar sdkman para instalar Java 8:</span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>    <span class="in">```         </span></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="in">    # .sdkmanrc</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="in">    # Enable auto-env through the sdkman_auto_env config</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="in">    # Add key=value pairs of SDKs to use below</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="in">    java=8.0.352-amzn</span></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Cambiar el <span class="in">`pom.xml`</span> a Java 8:</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>    <span class="in">``` xml</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">build</span>&gt;</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">plugins</span>&gt;</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">plugin</span>&gt;</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>                ...</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">configuration</span>&gt;</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>                    &lt;<span class="kw">source</span>&gt;1.8&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>                    &lt;<span class="kw">target</span>&gt;1.8&lt;/<span class="kw">target</span>&gt;</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>                    ...</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>                &lt;/<span class="kw">configuration</span>&gt;</span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">plugin</span>&gt;</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">plugins</span>&gt;</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">build</span>&gt;</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>El archivo <span class="in">`src/main/java/metrics/overview/sizeandcomplexity/nom/NomMetric.java`</span> va a fallar, entonces hay que agregar:</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>El import de <span class="in">`import org.apache.commons.lang3.StringUtils;`</span>.</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>Reemplazar <span class="in">`methodName.asText().isBlank()`</span> a <span class="in">`StringUtils.isBlank(methodName.asText())`</span>.</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Correr <span class="in">`mvn compile`</span>.</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>Correr <span class="in">`mvn install`</span>.</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>Este proceso instalará el proyecto en la siguiente dirección:</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`~/.m2/repository/avib/coderetriever/avib.coderetriever.analyzer`</span>.</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="fu">### Instalar Repositoryminer {#install-sec-instalar-repositoryminer}</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>Luego de instalar los 3 proyectos anteriores (<span class="co">[</span><span class="ot">GAST</span><span class="co">](#sec-1.-instalar-gast)</span>, <span class="co">[</span><span class="ot">Mapper</span><span class="co">](#install-sec-2.-instalar-mapper)</span>, <span class="co">[</span><span class="ot">Analyzer</span><span class="co">](#sec-3.-instalar-analyzer)</span>). Se necesita instalar <span class="co">[</span><span class="ot">kevinah95/repositoryminer</span><span class="co">](https://github.com/kevinah95/repositoryminer)</span>. Para ello se pueden seguir estos pasos:</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">kevinah95/repositoryminer</span><span class="co">](https://github.com/kevinah95/repositoryminer)</span>.</span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Este proyecto utiliza <span class="co">[</span><span class="ot">sdkman</span><span class="co">](https://sdkman.io/usage#env)</span> para configurar el ambiente. Para instalar estos SDKs que faltan, basta con escribir:</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>    <span class="in">``` bash</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sdk</span> env install</span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Para cambiar a la configuración presente en el archivo <span class="in">`.sdkmanrc`</span>, simplemente ejecute el siguiente comando:</span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>    <span class="in">``` bash</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sdk</span> env</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>    Este comando instalará Java 11 y Gradle 7.</span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Correr el comando: <span class="in">`gradle build`</span>.</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Correr el comando: <span class="in">`gradle publishToMavenLocal`</span>.</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>Este proceso instalará el proyecto en la siguiente dirección:</span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`~/.m2/repository/org/repositoryminer/core`</span>.</span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### Correr RepominerRunner</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>Una vez instalados los proyectos anteriores (<span class="co">[</span><span class="ot">Repositoryminer</span><span class="co">](#sec-instalar-repositoryminer)</span>, <span class="co">[</span><span class="ot">GAST</span><span class="co">](#sec-1.-instalar-gast)</span>, <span class="co">[</span><span class="ot">Mapper</span><span class="co">](#install-sec-2.-instalar-mapper)</span>, <span class="co">[</span><span class="ot">Analyzer</span><span class="co">](#sec-3.-instalar-analyzer)</span>). Podemos correr el proyecto para la generación de datos de entrada:</span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">kevinah95/repominer-runner</span><span class="co">](https://github.com/kevinah95/repominer-runner)</span>.</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Modificar la conexión con Mongo (<span class="co">[</span><span class="ot">línea 27</span><span class="co">](https://github.com/kevinah95/repominer-runner/blob/master/src/main/java/org/example/Main.java#L27)</span>).</span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Modificar la descripción del repositorio en estudio (<span class="co">[</span><span class="ot">línea 35</span><span class="co">](https://github.com/kevinah95/repominer-runner/blob/9e22176e9b07e0cc7ea8af9f86cef13d66de98c0/src/main/java/org/example/Main.java#L35)</span>).</span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a>Una vez que se haya ejecutado el procesamiento se almacenara en la base de datos Mongo, previamente configurada.</span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### Correr API</span></span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a>Para poder extraer la información necesario como datos de entrada se puede utilizar un API. Un ejemplo de su implementación se encuentra en el repositorio <span class="co">[</span><span class="ot">kevinah95/nextjs-with-mongodb-api</span><span class="co">](https://github.com/kevinah95/nextjs-with-mongodb)</span>. Para ejecutar el proyecto es necesario seguir estos pasos:</span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Clonar el repositorio <span class="co">[</span><span class="ot">kevinah95/nextjs-with-mongodb-api</span><span class="co">](https://github.com/kevinah95/nextjs-with-mongodb)</span>.</span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Renombrar el archivo <span class="in">`.env.local.example`</span> por <span class="in">`.env.local`</span>.</span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Cambiar la variable de ambiente en el archivo <span class="in">`.env.local`</span>:</span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a>    <span class="in">`MONGODB_URI`</span> - Cadena de conexión a MongoDB. Si se utiliza MongoDB Atlas, se puede encontrar haciendo clic en el botón "Conectar" del clúster.</span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Ejecutar Next.js en modo de desarrollo:</span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a>    <span class="in">``` bash</span></span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a>    <span class="ex">npm</span> install</span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>    <span class="ex">npm</span> run dev</span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sino</span></span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>    <span class="ex">yarn</span> install</span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a>    <span class="ex">yarn</span> dev</span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>La aplicación debería estar funcionando en <span class="co">[</span><span class="ot">http://localhost:3000</span><span class="co">](http://localhost:3000.)</span>. Puede hacer uso del API por ejemplo:</span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span><span class="in">`api/commits/:repositoryId`</span>: Para obtener la lista de commits por repositorio.</span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span><span class="in">`api/repositories`</span>: Para obtener la información de los repositorios minados.</span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a>La lista de commits funcionará como datos de entrada para este repositorio.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Build v1.6.0</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
