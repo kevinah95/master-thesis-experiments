@@ -12,8 +12,8 @@ book:
   sharing: [twitter, facebook, linkedin]
   chapters:
     - index.qmd
-    - chapters/ch01/intro.qmd
-    - chapters/ch02/structure.qmd
+    - chapters/ch01/install.qmd
+    - chapters/ch02/architecture.qmd
     - chapters/ch03/experiments.qmd
     - chapters/references.qmd
   page-footer: "Build v1.5.0" # x-release-please-version

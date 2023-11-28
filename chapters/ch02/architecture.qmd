@@ -1,0 +1,29 @@
+# Arquitectura
+
+La arquitectura se basa en cliente/servidor, en la que los procesos de ETL y AAES son ejecutados por el servidor y EVCES es un notebook hosteado en [ObservableHQ](https://observablehq.com) y donde el VVAH se accede mediante su propio API. Los diferentes módulos y componentes de la arquitectura se describen en el siguiente orden: recuperación de datos, análisis de datos y representación visual.
+
+En la arquitectura se muestran dos módulos o gestores de tareas:
+
+-   ETL y Analizador Avanzado de la Evolución del Software (AAES).
+
+-   Vinculador de Vistas y Analizador de Hechos (VVAH).
+
+Estos gestores son los orquestadores que tienen la tarea del preprocesamiento de los datos donde en primera instancia (ETL) se procesan los datos extraídos del repositorio de soluciones programadas para una primera fase de transformación, detección de métricas en la evolución del software (AAES) y luego la cargar de datos a la base de datos. Luego de ser cargados, el orquestador encargado de vincular y analizar los hechos lee la base, obtiene los datos integrados (commit, desarrollador del commit, archivos que fueron modificados), procesa los datos integrados para una segunda fase de transformación hasta convertirlos en el historial de cambios con desarrolladores normalizados. Estos dos procesos llamados orquestadores son los encargados de enviar mensajes que activen las dos visualizaciones que les siguen.
+
+Los otros dos gestores de tareas dependen de los orquestadores, pero son independientes uno del otro:
+
+-   Visualización de la complejidad única.
+
+-   Visualización del esfuerzo total de los desarrolladores.
+
+Este proyecto depende de:
+
+-   [GAST](https://github.com/Softlab-TEC/GAST)
+
+-   [Mapper](https://github.com/Softlab-TEC/Mapper)
+
+-   [Analyzer](https://github.com/Softlab-TEC/Analyzer)
+
+Para minar se utiliza:
+
+-   [repositoryminer](https://github.com/kevinah95/repositoryminer)

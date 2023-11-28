@@ -1,0 +1,213 @@
+# Instalación
+
+Para renderizar el libro usted mismo, siga estos pasos:
+
+1.  Clonar el repositorio [kevinah95/master-thesis-experiments](https://github.com/kevinah95/master-thesis-experiments.git)
+
+2.  Instalar R Studio y Quarto.
+
+3.  Correr el comando `make install`
+
+4.  Renderizar el html con `make html`
+
+5.  Correr el servidor `make serve`
+
+::: {.callout-note appearance="simple"}
+## Datos de entrada
+
+Este repositorio cuenta con datos previamente generados. Para generar datos de entrada nuevos es importante seguir los pasos de la sección [Generación de datos de entrada](#sec-generación-de-datos-de-entrada). Si no se requiere generar nuevos datos de entrada se puede saltar esa sección.
+:::
+
+## Generación de datos de entrada (Opcional) {#sec-generación-de-datos-de-entrada}
+
+En esta sección se explica cómo instalar los proyectos para la generación de datos de entrada.
+
+### Instalar GAST {#install-sec-1.-instalar-gast}
+
+Este proyecto utiliza [Maven](https://maven.apache.org/index.html). Para utilizar las funcionalidades proporcionadas por este proyecto, se debe instalar la dependencia Maven de este proyecto en el repositorio local de Maven (p.ej. `~/.m2/repository`). Los pasos son los siguientes:
+
+1.  Clonar el repositorio [Softlab-TEC/GAST](https://github.com/Softlab-TEC/GAST).
+2.  Cambiar de branch a `develop-GAST`.
+3.  Correr `mvn install`.
+
+Este proceso instalará el proyecto en la siguiente dirección:
+
+-   `~/.m2/repository/avib/coderetriever/avib.coderetriever.gast`.
+
+### Instalar Mapper {#install-install-sec-2.-instalar-mapper}
+
+Todas las dependencias se descargan automáticamente por Maven, pero una de esas dependencias, el proyecto GAST, debe ser instalado manualmente. Puede ver las dependencias de Maven en el archivo Pom.xml de este proyecto.
+
+Para ello, es importante realizar primero la [Instalación del GAST](#sec-1.-instalar-gast). Luego se pueden seguir los siguientes pasos:
+
+1.  Clonar el repositorio [Softlab-TEC/Mapper](https://github.com/Softlab-TEC/Mapper).
+
+2.  Sustituir la dependencia por:
+
+    ``` xml
+    <!-- https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.core -->
+    <dependency>
+        <groupId>org.eclipse.jdt</groupId>
+        <artifactId>org.eclipse.jdt.core</artifactId>
+        <version>3.22.0</version>
+        <exclusions>
+            <exclusion>
+                <!-- declare the exclusion here -->
+                <groupId>org.eclipse.platform</groupId>
+                <artifactId>org.eclipse.core.runtime</artifactId>
+            </exclusion>
+            <exclusion>
+                <!-- declare the exclusion here -->
+                <groupId>org.eclipse.platform</groupId>
+                <artifactId>org.eclipse.equinox.common</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <dependency>
+        <groupId>org.eclipse.platform</groupId>
+        <artifactId>org.eclipse.core.runtime</artifactId>
+        <version>3.13.0</version>
+        <scope>compile</scope>
+        <exclusions>
+            <exclusion>
+                <!-- declare the exclusion here -->
+                <groupId>org.eclipse.platform</groupId>
+                <artifactId>org.eclipse.equinox.common</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <dependency>
+        <groupId>org.eclipse.platform</groupId>
+        <artifactId>org.eclipse.equinox.common</artifactId>
+        <version>3.14.100</version>
+        <scope>compile</scope>
+    </dependency>
+    ```
+
+3.  Correr `mvn install`.
+
+Este proceso instalará el proyecto en la siguiente dirección:
+
+-   `~/.m2/repository/avib/coderetriever/avib.coderetriever.mapper`.
+
+### Instalar Analyzer {#install-sec-3.-instalar-analyzer}
+
+Todas las dependencias se descargan automáticamente por Maven, pero dos de esas dependencias, GAST y Mapper, deben ser instaladas manualmente. Puede ver las dependencias de Maven en el archivo Pom.xml de este proyecto.
+
+Para ello, es importante realizar primero la [Instalación del GAST](#sec-1.-instalar-gast), luego [Instalar Mapper](#sec-2.-instalar-mapper). Luego se pueden seguir los siguientes pasos:
+
+1.  Clonar el repositorio [Softlab-TEC/Analyzer](https://github.com/Softlab-TEC/Analyzer).
+
+2.  Cambiar de branch a `develop-metrics`.
+
+3.  Utilizar sdkman para instalar Java 8:
+
+    ```         
+    # .sdkmanrc
+    # Enable auto-env through the sdkman_auto_env config
+    # Add key=value pairs of SDKs to use below
+    java=8.0.352-amzn
+    ```
+
+4.  Cambiar el `pom.xml` a Java 8:
+
+    ``` xml
+    <build>
+        <plugins>
+            <plugin>
+                ...
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    ...
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    ```
+
+5.  El archivo `src/main/java/metrics/overview/sizeandcomplexity/nom/NomMetric.java` va a fallar, entonces hay que agregar:
+
+    1.  El import de `import org.apache.commons.lang3.StringUtils;`.
+    2.  Reemplazar `methodName.asText().isBlank()` a `StringUtils.isBlank(methodName.asText())`.
+
+6.  Correr `mvn compile`.
+
+7.  Correr `mvn install`.
+
+Este proceso instalará el proyecto en la siguiente dirección:
+
+-   `~/.m2/repository/avib/coderetriever/avib.coderetriever.analyzer`.
+
+### Instalar Repositoryminer {#install-sec-instalar-repositoryminer}
+
+Luego de instalar los 3 proyectos anteriores ([GAST](#sec-1.-instalar-gast), [Mapper](#install-sec-2.-instalar-mapper), [Analyzer](#sec-3.-instalar-analyzer)). Se necesita instalar [kevinah95/repositoryminer](https://github.com/kevinah95/repositoryminer). Para ello se pueden seguir estos pasos:
+
+1.  Clonar el repositorio [kevinah95/repositoryminer](https://github.com/kevinah95/repositoryminer).
+
+2.  Este proyecto utiliza [sdkman](https://sdkman.io/usage#env) para configurar el ambiente. Para instalar estos SDKs que faltan, basta con escribir:
+
+    ``` bash
+    sdk env install
+    ```
+
+3.  Para cambiar a la configuración presente en el archivo `.sdkmanrc`, simplemente ejecute el siguiente comando:
+
+    ``` bash
+    sdk env
+    ```
+
+    Este comando instalará Java 11 y Gradle 7.
+
+4.  Correr el comando: `gradle build`.
+
+5.  Correr el comando: `gradle publishToMavenLocal`.
+
+Este proceso instalará el proyecto en la siguiente dirección:
+
+-   `~/.m2/repository/org/repositoryminer/core`.
+
+### Correr RepominerRunner
+
+Una vez instalados los proyectos anteriores ([Repositoryminer](#sec-instalar-repositoryminer), [GAST](#sec-1.-instalar-gast), [Mapper](#install-sec-2.-instalar-mapper), [Analyzer](#sec-3.-instalar-analyzer)). Podemos correr el proyecto para la generación de datos de entrada:
+
+1.  Clonar el repositorio [kevinah95/repominer-runner](https://github.com/kevinah95/repominer-runner).
+
+2.  Modificar la conexión con Mongo ([línea 27](https://github.com/kevinah95/repominer-runner/blob/master/src/main/java/org/example/Main.java#L27)).
+
+3.  Modificar la descripción del repositorio en estudio ([línea 35](https://github.com/kevinah95/repominer-runner/blob/9e22176e9b07e0cc7ea8af9f86cef13d66de98c0/src/main/java/org/example/Main.java#L35)).
+
+Una vez que se haya ejecutado el procesamiento se almacenara en la base de datos Mongo, previamente configurada.
+
+### Correr API
+
+Para poder extraer la información necesario como datos de entrada se puede utilizar un API. Un ejemplo de su implementación se encuentra en el repositorio [kevinah95/nextjs-with-mongodb-api](https://github.com/kevinah95/nextjs-with-mongodb). Para ejecutar el proyecto es necesario seguir estos pasos:
+
+1.  Clonar el repositorio [kevinah95/nextjs-with-mongodb-api](https://github.com/kevinah95/nextjs-with-mongodb).
+
+2.  Renombrar el archivo `.env.local.example` por `.env.local`.
+
+3.  Cambiar la variable de ambiente en el archivo `.env.local`:
+
+    `MONGODB_URI` - Cadena de conexión a MongoDB. Si se utiliza MongoDB Atlas, se puede encontrar haciendo clic en el botón "Conectar" del clúster.
+
+4.  Ejecutar Next.js en modo de desarrollo:
+
+    ``` bash
+    npm install
+    npm run dev
+
+    # sino
+
+    yarn install
+    yarn dev
+    ```
+
+5.  La aplicación debería estar funcionando en [http://localhost:3000](http://localhost:3000.). Puede hacer uso del API por ejemplo:
+
+    1.  `api/commits/:repositoryId`: Para obtener la lista de commits por repositorio.
+    2.  `api/repositories`: Para obtener la información de los repositorios minados.
+
+La lista de commits funcionará como datos de entrada para este repositorio.
