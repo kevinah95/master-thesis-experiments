@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [release-please](https://github.com/googleapis/release-please),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.7.0...v1.8.0) (2025-03-14)
+
+
+### Features
+
+* Remove renv configuration and related files ([81e4479](https://github.com/kevinah95/master-thesis-experiments/commit/81e4479e49bbfdaef96194a262fcea37969ba88a))
+* Uncomment editor option for Quarto in VSCode configuration ([0be035d](https://github.com/kevinah95/master-thesis-experiments/commit/0be035dd2bb5510a6d35cabf777790a2892fb839))
+
 ## [1.7.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.6.0...v1.7.0) (2025-03-14)
 
 
