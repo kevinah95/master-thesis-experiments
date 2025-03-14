@@ -5,30 +5,17 @@ version: '3'
 tasks:
   default:
     - task: preview
-  install:
-    desc: Install renv and restore virtual environment.
-    cmd: Rscript -e 'install.packages("renv")' \
-                 -e 'renv::activate(".")' \
-                 -e 'renv::restore(".", prompt = FALSE)'
-  restore:
-    desc: Restore virtual environment to state in lock file.
-    cmd: Rscript -e 'renv::restore(".", prompt = FALSE)'
-  
+
   preview:
     desc: Start a http server to serve the book.
-    deps:
-      - restore
     cmd: quarto preview
+
   preview:pdf:
     desc: Start a http server to serve the pdf book.
-    deps:
-      - restore
     cmd: quarto preview --to pdf
 
   render:pdf:
     desc: Render book as pdf.
-    deps:
-      - restore
     cmd: quarto render --to pdf
 
   clean:
