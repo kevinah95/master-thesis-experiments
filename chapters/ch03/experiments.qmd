@@ -26,15 +26,15 @@ stadistics = {
   return vl.markBar()
             .data(df22)
             .encode(
-              vl.y().fieldN('dev'),
-              vl.x().fieldQ('metric')
+              vl.y().fieldN('dev').title('Desarrolladores'),
+              vl.x().fieldQ('metric').title('Complejidad única')
             )
             .width(160)
-            .height(500)
+            .height(560)
             .render()
 }
 
-viewof riskPercentile = Inputs.range([0, 100], {step: 1, label: "Percentil de riesgo"})
+viewof riskPercentile = Inputs.range([0, 100], {step: 1, label: "Percentil de riesgo", value: 70})
 ```
 
 ```{ojs}
@@ -595,7 +595,7 @@ repos = {
   });
   
   const cs_lively = ({
-    repository: {name: "lively"},
+    repository: {name: "cs.lively"},
     changes: await FileAttachment("./../../data/cs/cs_changes_lively.json").json()
   });
   
