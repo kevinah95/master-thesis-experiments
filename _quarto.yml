@@ -39,5 +39,6 @@ format:
 
 freeze: true
 
-editor: visual
+# Uncomment to use quarto editor for editing when open a file in VSCode
+# editor: visual
 
