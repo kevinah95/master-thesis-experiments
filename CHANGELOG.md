@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [release-please](https://github.com/googleapis/release-please),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.6.0...v1.7.0) (2025-03-14)
+
+
+### Features
+
+* Add Taskfile for project management and update experiment titles ([8f77e08](https://github.com/kevinah95/master-thesis-experiments/commit/8f77e089faa302f3f63599d418e7ea1741b04d49))
+* Remove Makefile and update project configuration to use BuildType ([d834c60](https://github.com/kevinah95/master-thesis-experiments/commit/d834c60336cb23fb4042f37e05bdc526399c0097))
+
 ## [1.6.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.5.0...v1.6.0) (2023-11-28)
 
 

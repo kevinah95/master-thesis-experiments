@@ -16,7 +16,7 @@ book:
     - chapters/ch02/architecture.qmd
     - chapters/ch03/experiments.qmd
     - chapters/references.qmd
-  page-footer: "Build v1.6.0" # x-release-please-version
+  page-footer: "Build v1.7.0" # x-release-please-version
 
 bibliography: references.bib
 
