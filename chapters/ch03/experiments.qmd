@@ -320,7 +320,7 @@ devs_by_email = changes_with_dev_key
 ### Tabulator
 
 ```{ojs}
-Tabulator = require("tabulator-tables@5.5.2")
+Tabulator = require("tabulator-tables@6.3.1")
 ```
 
 ### Helper Functions
