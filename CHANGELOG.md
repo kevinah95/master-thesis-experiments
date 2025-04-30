@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [release-please](https://github.com/googleapis/release-please),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.8.0...v1.9.0) (2025-04-30)
+
+
+### Features
+
+* :package: Update Tabulator dependency to version 6.3.1 ([62f260a](https://github.com/kevinah95/master-thesis-experiments/commit/62f260a872551592b95dd4ff3204bb226c2bbaac))
+
 ## [1.8.0](https://github.com/kevinah95/master-thesis-experiments/compare/v1.7.0...v1.8.0) (2025-03-14)
 
 
